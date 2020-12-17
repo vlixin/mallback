@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: db, core, admin
+  messages:
+    encoding: UTF-8
+
+server:
+  port: 8083
+
+logging:
+  level:
+    root:  ERROR
+    org.springframework:  ERROR
+    org.mybatis:  ERROR
+    com.lixin.litemall.admin:  DEBUG
+    com.lixin.litemall:  ERROR
+
+
+swagger:
+  production: false
+
+mybatis:
+  type-aliases-package: com.lixin.little-db.mybatis
+
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mall-admin-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: 'Bearer '  #JWT负载中拿到开头
