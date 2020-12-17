@@ -1,6 +1,7 @@
 package com.lixin.litemall.wx.web;
 
 import com.github.pagehelper.PageInfo;
+import com.lixin.litemall.common.api.CommonResult;
 import com.lixin.litemall.core.system.SystemConfig;
 import com.lixin.litemall.core.util.ResponseUtil;
 import com.lixin.litemall.core.validator.Order;
@@ -32,6 +33,7 @@ import java.util.concurrent.*;
 @RequestMapping("/wx/goods")
 @Validated
 public class WxGoodsController {
+
 	private final static ArrayBlockingQueue<Runnable> WORK_QUEUE = new ArrayBlockingQueue<>(9);
 	private final static RejectedExecutionHandler HANDLER = new ThreadPoolExecutor.CallerRunsPolicy();
 	private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(16, 16, 1000, TimeUnit.MILLISECONDS, WORK_QUEUE, HANDLER);
@@ -307,6 +309,13 @@ public class WxGoodsController {
 	public Object count() {
 		Integer goodsCount = goodsService.queryOnSale();
 		return ResponseUtil.ok(goodsCount);
+	}
+
+	/**
+	 * 获取带排序的所有商品
+	 */
+	public CommonResult<List<LitemallGoods>> getOrderGoods() {
+		return null;
 	}
 
 }
