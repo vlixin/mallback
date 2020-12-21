@@ -13,7 +13,7 @@ public interface WxGoodsService {
     /**
      * 获取当前所有的商品按照类型和商品的排序
      */
-    List<LitemallGoods> getAllOrderGoodsAndCateGory();
+    List<LitemallGoods> getAllOrderGoodsAndCateGory(String shopId);
 
     /**
      * 获取当前店铺所有的类型分类

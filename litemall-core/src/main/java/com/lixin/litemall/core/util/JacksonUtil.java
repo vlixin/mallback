@@ -2,8 +2,10 @@ package com.lixin.litemall.core.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -15,8 +17,23 @@ public class JacksonUtil {
 
     private static final Log logger = LogFactory.getLog(JacksonUtil.class);
 
+
+    public final static ObjectMapper mapper;
+
+    static {
+        mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+
+    public static <T> T parseStringToObject(String body, Class<T> tClass) throws IOException {
+        return mapper.readValue(body, tClass);
+    }
+
+
     public static String parseString(String body, String field) {
-        ObjectMapper mapper = new ObjectMapper();
+
         JsonNode node;
         try {
             node = mapper.readTree(body);
@@ -31,7 +48,7 @@ public class JacksonUtil {
 
 
     public static List<String> parseStringList(String body, String field) {
-        ObjectMapper mapper = new ObjectMapper();
+
         JsonNode node;
         try {
             node = mapper.readTree(body);
@@ -47,7 +64,7 @@ public class JacksonUtil {
     }
 
     public static Integer parseInteger(String body, String field) {
-        ObjectMapper mapper = new ObjectMapper();
+
         JsonNode node;
         try {
             node = mapper.readTree(body);
@@ -61,7 +78,7 @@ public class JacksonUtil {
     }
 
     public static List<Integer> parseIntegerList(String body, String field) {
-        ObjectMapper mapper = new ObjectMapper();
+
         JsonNode node;
         try {
             node = mapper.readTree(body);
@@ -78,7 +95,7 @@ public class JacksonUtil {
 
 
     public static Boolean parseBoolean(String body, String field) {
-        ObjectMapper mapper = new ObjectMapper();
+
         JsonNode node;
         try {
             node = mapper.readTree(body);
@@ -92,7 +109,7 @@ public class JacksonUtil {
     }
 
     public static Short parseShort(String body, String field) {
-        ObjectMapper mapper = new ObjectMapper();
+
         JsonNode node;
         try {
             node = mapper.readTree(body);
@@ -108,7 +125,7 @@ public class JacksonUtil {
     }
 
     public static Byte parseByte(String body, String field) {
-        ObjectMapper mapper = new ObjectMapper();
+
         JsonNode node;
         try {
             node = mapper.readTree(body);
@@ -124,7 +141,7 @@ public class JacksonUtil {
     }
 
     public static <T> T parseObject(String body, String field, Class<T> clazz) {
-        ObjectMapper mapper = new ObjectMapper();
+
         JsonNode node;
         try {
             node = mapper.readTree(body);
@@ -152,9 +169,9 @@ public class JacksonUtil {
     }
 
     public static Map<String, String> toMap(String data) {
-        ObjectMapper objectMapper = new ObjectMapper();
+
         try {
-            return objectMapper.readValue(data, new TypeReference<Map<String, String>>() {
+            return mapper.readValue(data, new TypeReference<Map<String, String>>() {
             });
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
@@ -171,4 +188,6 @@ public class JacksonUtil {
         }
         return null;
     }
+
+
 }
