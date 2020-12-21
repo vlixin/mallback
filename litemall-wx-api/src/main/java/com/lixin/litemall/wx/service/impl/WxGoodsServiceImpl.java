@@ -1,7 +1,5 @@
 package com.lixin.litemall.wx.service.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.lixin.litemall.core.util.JacksonUtil;
 import com.lixin.litemall.db.dao.LitemallGoodsMapper;
 import com.lixin.litemall.db.dao.LitemallGoodsProductMapper;
 import com.lixin.litemall.db.domain.*;
@@ -11,7 +9,6 @@ import com.lixin.litemall.wx.vo.goods.GoodsSpecificationVo;
 import net.sf.cglib.beans.BeanCopier;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 
 public class WxGoodsServiceImpl implements WxGoodsService {
@@ -47,8 +44,6 @@ public class WxGoodsServiceImpl implements WxGoodsService {
             for (LitemallGoodsProduct goodsSpec : goodsSpecs) {
                 GoodsSpecificationVo goodsSpecificationVo = new GoodsSpecificationVo();
 
-                JacksonUtil.mapper.readValue(goodsSpec.getSpecifications(), new TypeReference<HashMap<String, String>>() {
-                });
             }
 
 
