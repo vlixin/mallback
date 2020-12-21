@@ -29,7 +29,7 @@ litemall-db模块是一个普通的Spring Boot应用，基于mybatis框架实现
 * Druid
 * Mybatis
 * PageHelper
-* Mybatis Generator
+* Mybatis com.lixin.litemall.db.genera.Generator
 * Mybatis Generator非官方插件mybatis-generator-plugin
 
 ![](./pics/platform/db-main.png)

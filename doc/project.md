@@ -188,7 +188,7 @@ Spring Boot技术栈参考以下文档或者项目：
  
     这里可以简单了解，而使用Mybatis Generator来生成Java代码使用即可。
     
-4. Mybatis Generator
+4. Mybatis com.lixin.litemall.db.genera.Generator
 
     * http://www.mybatis.org/generator/running/runningWithMaven.html
     * http://www.mybatis.org/generator/generatedobjects/results.html
