@@ -13,6 +13,10 @@
         <result column="deleted" jdbcType="BIT" property="deleted"/>
         <result column="role_ids" jdbcType="VARCHAR" property="roleIds"
                 typeHandler="com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler"/>
+        <result column="min_del_price" jdbcType="INTEGER" property="minDelPrice"/>
+        <result column="del_price" jdbcType="INTEGER" property="delPrice"/>
+        <result column="shop_id" jdbcType="VARCHAR" property="shopId"/>
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -124,7 +128,7 @@
     </sql>
     <sql id="Base_Column_List">
         id, username, `password`, last_login_ip, last_login_time, avatar, add_time, update_time,
-    deleted, role_ids
+    deleted, role_ids, min_del_price, del_price, shop_id, shop_name
     </sql>
     <select id="selectByExample" parameterType="com.lixin.litemall.db.domain.LitemallAdminExample"
             resultMap="BaseResultMap">
@@ -217,13 +221,15 @@
         </selectKey>
         insert into litemall_admin (username, `password`, last_login_ip,
         last_login_time, avatar, add_time,
-        update_time, deleted, role_ids
-        )
+        update_time, deleted, role_ids,
+        min_del_price, del_price, shop_id,
+        shop_name)
         values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR},
         #{lastLoginTime,jdbcType=TIMESTAMP}, #{avatar,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP},
         #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT},
-        #{roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
-        )
+        #{roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
+        #{minDelPrice,jdbcType=INTEGER}, #{delPrice,jdbcType=INTEGER}, #{shopId,jdbcType=VARCHAR},
+        #{shopName,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.lixin.litemall.db.domain.LitemallAdmin">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -258,6 +264,18 @@
             <if test="roleIds != null">
                 role_ids,
             </if>
+            <if test="minDelPrice != null">
+                min_del_price,
+            </if>
+            <if test="delPrice != null">
+                del_price,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="shopName != null">
+                shop_name,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="username != null">
@@ -286,6 +304,18 @@
             </if>
             <if test="roleIds != null">
                 #{roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
+            </if>
+            <if test="minDelPrice != null">
+                #{minDelPrice,jdbcType=INTEGER},
+            </if>
+            <if test="delPrice != null">
+                #{delPrice,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=VARCHAR},
+            </if>
+            <if test="shopName != null">
+                #{shopName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -330,6 +360,18 @@
                 role_ids =
                 #{record.roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
             </if>
+            <if test="record.minDelPrice != null">
+                min_del_price = #{record.minDelPrice,jdbcType=INTEGER},
+            </if>
+            <if test="record.delPrice != null">
+                del_price = #{record.delPrice,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shopName != null">
+                shop_name = #{record.shopName,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -347,7 +389,11 @@
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
         deleted = #{record.deleted,jdbcType=BIT},
         role_ids =
-        #{record.roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
+        #{record.roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
+        min_del_price = #{record.minDelPrice,jdbcType=INTEGER},
+        del_price = #{record.delPrice,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=VARCHAR},
+        shop_name = #{record.shopName,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -383,6 +429,18 @@
                 role_ids =
                 #{roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
             </if>
+            <if test="minDelPrice != null">
+                min_del_price = #{minDelPrice,jdbcType=INTEGER},
+            </if>
+            <if test="delPrice != null">
+                del_price = #{delPrice,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=VARCHAR},
+            </if>
+            <if test="shopName != null">
+                shop_name = #{shopName,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -396,7 +454,11 @@
             add_time        = #{addTime,jdbcType=TIMESTAMP},
             update_time     = #{updateTime,jdbcType=TIMESTAMP},
             deleted         = #{deleted,jdbcType=BIT},
-            role_ids        = #{roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler}
+            role_ids        = #{roleIds,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonIntegerArrayTypeHandler},
+            min_del_price   = #{minDelPrice,jdbcType=INTEGER},
+            del_price       = #{delPrice,jdbcType=INTEGER},
+            shop_id         = #{shopId,jdbcType=VARCHAR},
+            shop_name       = #{shopName,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="selectOneByExample" parameterType="com.lixin.litemall.db.domain.LitemallAdminExample"

@@ -40,6 +40,18 @@ public class LitemallAdmin {
     @ApiModelProperty(value = "角色列表")
     private Integer[] roleIds;
 
+    @ApiModelProperty(value = "最小配送价格")
+    private Integer minDelPrice;
+
+    @ApiModelProperty(value = "配送费")
+    private Integer delPrice;
+
+    @ApiModelProperty(value = "店铺ID")
+    private String shopId;
+
+    @ApiModelProperty(value = "店铺名字")
+    private String shopName;
+
     public Integer getId() {
         return id;
     }
@@ -124,6 +136,38 @@ public class LitemallAdmin {
         this.roleIds = roleIds;
     }
 
+    public Integer getMinDelPrice() {
+        return minDelPrice;
+    }
+
+    public void setMinDelPrice(Integer minDelPrice) {
+        this.minDelPrice = minDelPrice;
+    }
+
+    public Integer getDelPrice() {
+        return delPrice;
+    }
+
+    public void setDelPrice(Integer delPrice) {
+        this.delPrice = delPrice;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -142,6 +186,10 @@ public class LitemallAdmin {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", deleted=").append(deleted);
         sb.append(", roleIds=").append(roleIds);
+        sb.append(", minDelPrice=").append(minDelPrice);
+        sb.append(", delPrice=").append(delPrice);
+        sb.append(", shopId=").append(shopId);
+        sb.append(", shopName=").append(shopName);
         sb.append("]");
         return sb.toString();
     }
@@ -167,7 +215,11 @@ public class LitemallAdmin {
                 && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
                 && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
                 && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()))
-                && (Arrays.equals(this.getRoleIds(), other.getRoleIds()));
+                && (Arrays.equals(this.getRoleIds(), other.getRoleIds()))
+                && (this.getMinDelPrice() == null ? other.getMinDelPrice() == null : this.getMinDelPrice().equals(other.getMinDelPrice()))
+                && (this.getDelPrice() == null ? other.getDelPrice() == null : this.getDelPrice().equals(other.getDelPrice()))
+                && (this.getShopId() == null ? other.getShopId() == null : this.getShopId().equals(other.getShopId()))
+                && (this.getShopName() == null ? other.getShopName() == null : this.getShopName().equals(other.getShopName()));
     }
 
     @Override
@@ -184,6 +236,10 @@ public class LitemallAdmin {
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getDeleted() == null) ? 0 : getDeleted().hashCode());
         result = prime * result + (Arrays.hashCode(getRoleIds()));
+        result = prime * result + ((getMinDelPrice() == null) ? 0 : getMinDelPrice().hashCode());
+        result = prime * result + ((getDelPrice() == null) ? 0 : getDelPrice().hashCode());
+        result = prime * result + ((getShopId() == null) ? 0 : getShopId().hashCode());
+        result = prime * result + ((getShopName() == null) ? 0 : getShopName().hashCode());
         return result;
     }
 
@@ -223,7 +279,11 @@ public class LitemallAdmin {
         addTime("add_time", "addTime", "TIMESTAMP", false),
         updateTime("update_time", "updateTime", "TIMESTAMP", false),
         deleted("deleted", "deleted", "BIT", false),
-        roleIds("role_ids", "roleIds", "VARCHAR", false);
+        roleIds("role_ids", "roleIds", "VARCHAR", false),
+        minDelPrice("min_del_price", "minDelPrice", "INTEGER", false),
+        delPrice("del_price", "delPrice", "INTEGER", false),
+        shopId("shop_id", "shopId", "VARCHAR", false),
+        shopName("shop_name", "shopName", "VARCHAR", false);
 
         private static final String BEGINNING_DELIMITER = "`";
 

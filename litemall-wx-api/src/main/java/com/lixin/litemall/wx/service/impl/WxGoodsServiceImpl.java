@@ -2,6 +2,7 @@ package com.lixin.litemall.wx.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.lixin.litemall.core.util.JacksonUtil;
+import com.lixin.litemall.db.dao.LitemallAdminMapper;
 import com.lixin.litemall.db.dao.LitemallCategoryMapper;
 import com.lixin.litemall.db.dao.LitemallGoodsMapper;
 import com.lixin.litemall.db.dao.LitemallGoodsProductMapper;
@@ -34,6 +35,8 @@ public class WxGoodsServiceImpl implements WxGoodsService {
     LitemallGoodsProductMapper productMapper;
     @Resource
     LitemallCategoryMapper categoryMapper;
+    @Resource
+    LitemallAdminMapper adminMapper;
 
     Logger logger = LoggerFactory.getLogger(WxGoodsServiceImpl.class);
 
@@ -86,9 +89,8 @@ public class WxGoodsServiceImpl implements WxGoodsService {
 
         LitemallCategoryExample categoryExample = new LitemallCategoryExample();
         categoryExample.createCriteria()
-                .andLogicalDeleted(false)
                 .andShopIdEqualTo(shopId)
-                .andLevelEqualTo("L1");
+                .andLevelEqualTo("L2");
 
         return categoryMapper.selectByExample(categoryExample);
     }
@@ -98,7 +100,17 @@ public class WxGoodsServiceImpl implements WxGoodsService {
      *
      * @return
      */
+    @Override
     public StoreInfoVo getAllCategoryAndGoods(String shopId) {
+
+        LitemallAdminExample adminExample = new LitemallAdminExample();
+        adminExample.createCriteria()
+                .andShopIdEqualTo(shopId);
+        LitemallAdmin admin = adminMapper.selectOneByExample(adminExample);
+
+        StoreInfoVo store = new StoreInfoVo();
+        store.setDelPrice(admin.getDelPrice());
+        store.setMinDelPrice(admin.getMinDelPrice());
 
         ArrayList<CategoryInfoVo> categoryInfoVos = new ArrayList<>();
         List<LitemallCategory> allOrderGoodsCategory = getAllOrderGoodsCategory(shopId);
@@ -113,9 +125,8 @@ public class WxGoodsServiceImpl implements WxGoodsService {
             categoryInfoVo.setItems(allOrderGoodsAndCateGory);
             categoryInfoVos.add(categoryInfoVo);
         }
-
+        store.setFood(categoryInfoVos);
+        return store;
 
     }
-
-
 }

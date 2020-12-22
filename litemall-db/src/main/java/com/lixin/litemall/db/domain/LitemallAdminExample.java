@@ -106,94 +106,54 @@ public class LitemallAdminExample {
         void criteria(Criteria criteria);
     }
 
-    public interface IExampleWhen {
-        void example(com.lixin.litemall.db.domain.LitemallAdminExample example);
+    public static class Criteria extends GeneratedCriteria {
+        private LitemallAdminExample example;
+
+        protected Criteria(LitemallAdminExample example) {
+            super();
+            this.example = example;
+        }
+
+        public LitemallAdminExample example() {
+            return this.example;
+        }
+
+        @Deprecated
+        public Criteria andIf(boolean ifAdd, ICriteriaAdd add) {
+            if (ifAdd) {
+                add.add(this);
+            }
+            return this;
+        }
+
+        public Criteria when(boolean condition, ICriteriaWhen then) {
+            if (condition) {
+                then.criteria(this);
+            }
+            return this;
+        }
+
+        public Criteria when(boolean condition, ICriteriaWhen then, ICriteriaWhen otherwise) {
+            if (condition) {
+                then.criteria(this);
+            } else {
+                otherwise.criteria(this);
+            }
+            return this;
+        }
+
+        public Criteria andLogicalDeleted(boolean deleted) {
+            return deleted ? andDeletedEqualTo(LitemallAdmin.Deleted.IS_DELETED.value()) : andDeletedNotEqualTo(LitemallAdmin.Deleted.IS_DELETED.value());
+        }
+
+        @Deprecated
+        public interface ICriteriaAdd {
+            Criteria add(Criteria add);
+        }
     }
 
-    public static class Criterion {
-        private String condition;
-
-        private Object value;
-
-        private Object secondValue;
-
-        private boolean noValue;
-
-        private boolean singleValue;
-
-        private boolean betweenValue;
-
-        private boolean listValue;
-
-        private String typeHandler;
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
-        }
-
-        protected Criterion(String condition) {
-            super();
-            this.condition = condition;
-            this.typeHandler = null;
-            this.noValue = true;
-        }
-
-        protected Criterion(String condition, Object value, String typeHandler) {
-            super();
-            this.condition = condition;
-            this.value = value;
-            this.typeHandler = typeHandler;
-            if (value instanceof List<?>) {
-                this.listValue = true;
-            } else {
-                this.singleValue = true;
-            }
-        }
-
-        protected Criterion(String condition, Object value) {
-            this(condition, value, null);
-        }
-
-        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
-            super();
-            this.condition = condition;
-            this.value = value;
-            this.secondValue = secondValue;
-            this.typeHandler = typeHandler;
-            this.betweenValue = true;
-        }
-
-        protected Criterion(String condition, Object value, Object secondValue) {
-            this(condition, value, secondValue, null);
-        }
+    public interface IExampleWhen {
+        void example(com.lixin.litemall.db.domain.LitemallAdminExample example);
     }
 
     protected abstract static class GeneratedCriteria {
@@ -1220,51 +1180,471 @@ public class LitemallAdminExample {
             addRoleIdsCriterion("role_ids not between", value1, value2, "roleIds");
             return (Criteria) this;
         }
+
+        public Criteria andMinDelPriceIsNull() {
+            addCriterion("min_del_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceIsNotNull() {
+            addCriterion("min_del_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceEqualTo(Integer value) {
+            addCriterion("min_del_price =", value, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("min_del_price = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceNotEqualTo(Integer value) {
+            addCriterion("min_del_price <>", value, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceNotEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("min_del_price <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceGreaterThan(Integer value) {
+            addCriterion("min_del_price >", value, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceGreaterThanColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("min_del_price > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("min_del_price >=", value, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceGreaterThanOrEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("min_del_price >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceLessThan(Integer value) {
+            addCriterion("min_del_price <", value, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceLessThanColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("min_del_price < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceLessThanOrEqualTo(Integer value) {
+            addCriterion("min_del_price <=", value, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceLessThanOrEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("min_del_price <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceIn(List<Integer> values) {
+            addCriterion("min_del_price in", values, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceNotIn(List<Integer> values) {
+            addCriterion("min_del_price not in", values, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceBetween(Integer value1, Integer value2) {
+            addCriterion("min_del_price between", value1, value2, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinDelPriceNotBetween(Integer value1, Integer value2) {
+            addCriterion("min_del_price not between", value1, value2, "minDelPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceIsNull() {
+            addCriterion("del_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceIsNotNull() {
+            addCriterion("del_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceEqualTo(Integer value) {
+            addCriterion("del_price =", value, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("del_price = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceNotEqualTo(Integer value) {
+            addCriterion("del_price <>", value, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceNotEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("del_price <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceGreaterThan(Integer value) {
+            addCriterion("del_price >", value, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceGreaterThanColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("del_price > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("del_price >=", value, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceGreaterThanOrEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("del_price >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceLessThan(Integer value) {
+            addCriterion("del_price <", value, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceLessThanColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("del_price < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceLessThanOrEqualTo(Integer value) {
+            addCriterion("del_price <=", value, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceLessThanOrEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("del_price <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceIn(List<Integer> values) {
+            addCriterion("del_price in", values, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceNotIn(List<Integer> values) {
+            addCriterion("del_price not in", values, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceBetween(Integer value1, Integer value2) {
+            addCriterion("del_price between", value1, value2, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelPriceNotBetween(Integer value1, Integer value2) {
+            addCriterion("del_price not between", value1, value2, "delPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIsNull() {
+            addCriterion("shop_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIsNotNull() {
+            addCriterion("shop_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdEqualTo(String value) {
+            addCriterion("shop_id =", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_id = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotEqualTo(String value) {
+            addCriterion("shop_id <>", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_id <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdGreaterThan(String value) {
+            addCriterion("shop_id >", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdGreaterThanColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_id > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdGreaterThanOrEqualTo(String value) {
+            addCriterion("shop_id >=", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdGreaterThanOrEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_id >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLessThan(String value) {
+            addCriterion("shop_id <", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLessThanColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_id < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLessThanOrEqualTo(String value) {
+            addCriterion("shop_id <=", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLessThanOrEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_id <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLike(String value) {
+            addCriterion("shop_id like", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotLike(String value) {
+            addCriterion("shop_id not like", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIn(List<String> values) {
+            addCriterion("shop_id in", values, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotIn(List<String> values) {
+            addCriterion("shop_id not in", values, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdBetween(String value1, String value2) {
+            addCriterion("shop_id between", value1, value2, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotBetween(String value1, String value2) {
+            addCriterion("shop_id not between", value1, value2, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameIsNull() {
+            addCriterion("shop_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameIsNotNull() {
+            addCriterion("shop_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameEqualTo(String value) {
+            addCriterion("shop_name =", value, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_name = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameNotEqualTo(String value) {
+            addCriterion("shop_name <>", value, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameNotEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_name <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameGreaterThan(String value) {
+            addCriterion("shop_name >", value, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameGreaterThanColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_name > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameGreaterThanOrEqualTo(String value) {
+            addCriterion("shop_name >=", value, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameGreaterThanOrEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_name >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameLessThan(String value) {
+            addCriterion("shop_name <", value, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameLessThanColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_name < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameLessThanOrEqualTo(String value) {
+            addCriterion("shop_name <=", value, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameLessThanOrEqualToColumn(LitemallAdmin.Column column) {
+            addCriterion(new StringBuilder("shop_name <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameLike(String value) {
+            addCriterion("shop_name like", value, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameNotLike(String value) {
+            addCriterion("shop_name not like", value, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameIn(List<String> values) {
+            addCriterion("shop_name in", values, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameNotIn(List<String> values) {
+            addCriterion("shop_name not in", values, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameBetween(String value1, String value2) {
+            addCriterion("shop_name between", value1, value2, "shopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopNameNotBetween(String value1, String value2) {
+            addCriterion("shop_name not between", value1, value2, "shopName");
+            return (Criteria) this;
+        }
     }
 
-    public static class Criteria extends GeneratedCriteria {
-        private LitemallAdminExample example;
+    public static class Criterion {
+        private String condition;
 
-        protected Criteria(LitemallAdminExample example) {
+        private Object value;
+
+        private Object secondValue;
+
+        private boolean noValue;
+
+        private boolean singleValue;
+
+        private boolean betweenValue;
+
+        private boolean listValue;
+
+        private String typeHandler;
+
+        protected Criterion(String condition) {
             super();
-            this.example = example;
+            this.condition = condition;
+            this.typeHandler = null;
+            this.noValue = true;
         }
 
-        public LitemallAdminExample example() {
-            return this.example;
-        }
-
-        @Deprecated
-        public Criteria andIf(boolean ifAdd, ICriteriaAdd add) {
-            if (ifAdd) {
-                add.add(this);
-            }
-            return this;
-        }
-
-        public Criteria when(boolean condition, ICriteriaWhen then) {
-            if (condition) {
-                then.criteria(this);
-            }
-            return this;
-        }
-
-        public Criteria when(boolean condition, ICriteriaWhen then, ICriteriaWhen otherwise) {
-            if (condition) {
-                then.criteria(this);
+        protected Criterion(String condition, Object value, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.typeHandler = typeHandler;
+            if (value instanceof List<?>) {
+                this.listValue = true;
             } else {
-                otherwise.criteria(this);
+                this.singleValue = true;
             }
-            return this;
         }
 
-        public Criteria andLogicalDeleted(boolean deleted) {
-            return deleted ? andDeletedEqualTo(LitemallAdmin.Deleted.IS_DELETED.value()) : andDeletedNotEqualTo(LitemallAdmin.Deleted.IS_DELETED.value());
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
         }
 
-        @Deprecated
-        public interface ICriteriaAdd {
-            Criteria add(Criteria add);
+        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.secondValue = secondValue;
+            this.typeHandler = typeHandler;
+            this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
+        }
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
         }
     }
 }
