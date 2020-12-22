@@ -8,7 +8,7 @@ import java.util.List;
  * 当前店内关键信息
  */
 @Data
-public class ShopInfoVo {
+public class CategoryInfoVo {
     // 分类ID
     int categoryId;
     // 分类名称

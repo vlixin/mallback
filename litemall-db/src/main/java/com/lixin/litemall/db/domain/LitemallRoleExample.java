@@ -19,17 +19,17 @@ public class LitemallRoleExample {
         this.orderByClause = orderByClause;
     }
 
+    public String getOrderByClause() {
+        return orderByClause;
+    }
+
     public static Criteria newAndCreateCriteria() {
         LitemallRoleExample example = new LitemallRoleExample();
         return example.createCriteria();
     }
 
-    public void setDistinct(boolean distinct) {
-        this.distinct = distinct;
-    }
-
-    public String getOrderByClause() {
-        return orderByClause;
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -51,8 +51,8 @@ public class LitemallRoleExample {
         return this;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public void setDistinct(boolean distinct) {
+        this.distinct = distinct;
     }
 
     public Criteria createCriteria() {
@@ -840,14 +840,6 @@ public class LitemallRoleExample {
         }
     }
 
-    public interface ICriteriaWhen {
-        void criteria(Criteria criteria);
-    }
-
-    public interface IExampleWhen {
-        void example(com.lixin.litemall.db.domain.LitemallRoleExample example);
-    }
-
     public static class Criterion {
         private String condition;
 
@@ -932,5 +924,13 @@ public class LitemallRoleExample {
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
         }
+    }
+
+    public interface ICriteriaWhen {
+        void criteria(Criteria criteria);
+    }
+
+    public interface IExampleWhen {
+        void example(com.lixin.litemall.db.domain.LitemallRoleExample example);
     }
 }

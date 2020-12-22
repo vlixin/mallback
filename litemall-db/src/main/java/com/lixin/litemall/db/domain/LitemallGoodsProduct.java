@@ -38,6 +38,9 @@ public class LitemallGoodsProduct {
     @ApiModelProperty(value = "逻辑删除")
     private Boolean deleted;
 
+    @ApiModelProperty(value = "规格json {'key':'json'}")
+    private String specsJson;
+
     public Integer getId() {
         return id;
     }
@@ -114,6 +117,14 @@ public class LitemallGoodsProduct {
         this.deleted = deleted;
     }
 
+    public String getSpecsJson() {
+        return specsJson;
+    }
+
+    public void setSpecsJson(String specsJson) {
+        this.specsJson = specsJson;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -131,6 +142,7 @@ public class LitemallGoodsProduct {
         sb.append(", addTime=").append(addTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", deleted=").append(deleted);
+        sb.append(", specsJson=").append(specsJson);
         sb.append("]");
         return sb.toString();
     }
@@ -155,7 +167,8 @@ public class LitemallGoodsProduct {
                 && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
                 && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
                 && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()));
+                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()))
+                && (this.getSpecsJson() == null ? other.getSpecsJson() == null : this.getSpecsJson().equals(other.getSpecsJson()));
     }
 
     @Override
@@ -171,6 +184,7 @@ public class LitemallGoodsProduct {
         result = prime * result + ((getAddTime() == null) ? 0 : getAddTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getDeleted() == null) ? 0 : getDeleted().hashCode());
+        result = prime * result + ((getSpecsJson() == null) ? 0 : getSpecsJson().hashCode());
         return result;
     }
 
@@ -209,7 +223,8 @@ public class LitemallGoodsProduct {
         url("url", "url", "VARCHAR", false),
         addTime("add_time", "addTime", "TIMESTAMP", false),
         updateTime("update_time", "updateTime", "TIMESTAMP", false),
-        deleted("deleted", "deleted", "BIT", false);
+        deleted("deleted", "deleted", "BIT", false),
+        specsJson("specs_json", "specsJson", "VARCHAR", false);
 
         private static final String BEGINNING_DELIMITER = "`";
 

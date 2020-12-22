@@ -1,8 +1,9 @@
 package com.lixin.litemall.wx.service;
 
 import com.lixin.litemall.db.domain.LitemallCategory;
-import com.lixin.litemall.db.domain.LitemallGoods;
+import com.lixin.litemall.wx.vo.goods.GoodsProductVo;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -12,11 +13,13 @@ public interface WxGoodsService {
 
     /**
      * 获取当前所有的商品按照类型和商品的排序
+     *
+     * @return
      */
-    List<LitemallGoods> getAllOrderGoodsAndCateGory(String shopId);
+    List<GoodsProductVo> getAllOrderGoodsAndCateGory(Integer shopId) throws IOException;
 
     /**
      * 获取当前店铺所有的类型分类
      */
-    List<LitemallCategory> getAllOrderGoodsCategory();
+    List<LitemallCategory> getAllOrderGoodsCategory(String shopId);
 }

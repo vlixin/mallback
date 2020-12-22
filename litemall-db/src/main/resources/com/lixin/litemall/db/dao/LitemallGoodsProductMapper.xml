@@ -12,6 +12,7 @@
         <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="deleted" jdbcType="BIT" property="deleted"/>
+        <result column="specs_json" jdbcType="VARCHAR" property="specsJson"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -122,7 +123,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, goods_id, specifications, price, `number`, url, add_time, update_time, deleted
+        id, goods_id, specifications, price, `number`, url, add_time, update_time, deleted,
+    specs_json
     </sql>
     <select id="selectByExample" parameterType="com.lixin.litemall.db.domain.LitemallGoodsProductExample"
             resultMap="BaseResultMap">
@@ -145,7 +147,7 @@
             distinct
         </if>
         <choose>
-            <when test="selective != null and selective.length &gt; 0">
+            <when test="selective != null and selective.length > 0">
                 <foreach collection="selective" item="column" separator=",">
                     ${column.aliasedEscapedColumnName}
                 </foreach>
@@ -186,7 +188,7 @@
     <select id="selectByPrimaryKeySelective" parameterType="map" resultMap="BaseResultMap">
         select
         <choose>
-            <when test="selective != null and selective.length &gt; 0">
+            <when test="selective != null and selective.length > 0">
                 <foreach collection="selective" item="column" separator=",">
                     ${column.aliasedEscapedColumnName}
                 </foreach>
@@ -215,13 +217,13 @@
         </selectKey>
         insert into litemall_goods_product (goods_id, specifications,
         price, `number`, url,
-        add_time, update_time, deleted
-        )
+        add_time, update_time, deleted,
+        specs_json)
         values (#{goodsId,jdbcType=INTEGER},
         #{specifications,jdbcType=VARCHAR,typeHandler=com.lixin.litemall.db.mybatis.JsonStringArrayTypeHandler},
         #{price,jdbcType=DECIMAL}, #{number,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR},
-        #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
-        )
+        #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT},
+        #{specsJson,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.lixin.litemall.db.domain.LitemallGoodsProduct">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -253,6 +255,9 @@
             <if test="deleted != null">
                 deleted,
             </if>
+            <if test="specsJson != null">
+                specs_json,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="goodsId != null">
@@ -278,6 +283,9 @@
             </if>
             <if test="deleted != null">
                 #{deleted,jdbcType=BIT},
+            </if>
+            <if test="specsJson != null">
+                #{specsJson,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -319,6 +327,9 @@
             <if test="record.deleted != null">
                 deleted = #{record.deleted,jdbcType=BIT},
             </if>
+            <if test="record.specsJson != null">
+                specs_json = #{record.specsJson,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -335,7 +346,8 @@
         url = #{record.url,jdbcType=VARCHAR},
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-        deleted = #{record.deleted,jdbcType=BIT}
+        deleted = #{record.deleted,jdbcType=BIT},
+        specs_json = #{record.specsJson,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -368,6 +380,9 @@
             <if test="deleted != null">
                 deleted = #{deleted,jdbcType=BIT},
             </if>
+            <if test="specsJson != null">
+                specs_json = #{specsJson,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -380,7 +395,8 @@
             url            = #{url,jdbcType=VARCHAR},
             add_time       = #{addTime,jdbcType=TIMESTAMP},
             update_time    = #{updateTime,jdbcType=TIMESTAMP},
-            deleted        = #{deleted,jdbcType=BIT}
+            deleted        = #{deleted,jdbcType=BIT},
+            specs_json     = #{specsJson,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="selectOneByExample" parameterType="com.lixin.litemall.db.domain.LitemallGoodsProductExample"
@@ -399,7 +415,7 @@
     <select id="selectOneByExampleSelective" parameterType="map" resultMap="BaseResultMap">
         select
         <choose>
-            <when test="selective != null and selective.length &gt; 0">
+            <when test="selective != null and selective.length > 0">
                 <foreach collection="selective" item="column" separator=",">
                     ${column.aliasedEscapedColumnName}
                 </foreach>

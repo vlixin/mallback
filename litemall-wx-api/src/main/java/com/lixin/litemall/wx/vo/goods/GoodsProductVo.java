@@ -15,7 +15,7 @@ public class GoodsProductVo {
     private Integer categoryId;
 
     // 商品介绍图片
-    private String[] gallery;
+    //private String[] gallery;
     // 关键字
     private String keywords;
 

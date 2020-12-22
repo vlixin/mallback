@@ -20,17 +20,17 @@ public class LitemallTopicExample {
         this.orderByClause = orderByClause;
     }
 
+    public String getOrderByClause() {
+        return orderByClause;
+    }
+
     public static Criteria newAndCreateCriteria() {
         LitemallTopicExample example = new LitemallTopicExample();
         return example.createCriteria();
     }
 
-    public void setDistinct(boolean distinct) {
-        this.distinct = distinct;
-    }
-
-    public String getOrderByClause() {
-        return orderByClause;
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -52,8 +52,8 @@ public class LitemallTopicExample {
         return this;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public void setDistinct(boolean distinct) {
+        this.distinct = distinct;
     }
 
     public Criteria createCriteria() {
@@ -107,54 +107,94 @@ public class LitemallTopicExample {
         void criteria(Criteria criteria);
     }
 
-    public static class Criteria extends GeneratedCriteria {
-        private LitemallTopicExample example;
-
-        protected Criteria(LitemallTopicExample example) {
-            super();
-            this.example = example;
-        }
-
-        public LitemallTopicExample example() {
-            return this.example;
-        }
-
-        @Deprecated
-        public Criteria andIf(boolean ifAdd, ICriteriaAdd add) {
-            if (ifAdd) {
-                add.add(this);
-            }
-            return this;
-        }
-
-        public Criteria when(boolean condition, ICriteriaWhen then) {
-            if (condition) {
-                then.criteria(this);
-            }
-            return this;
-        }
-
-        public Criteria when(boolean condition, ICriteriaWhen then, ICriteriaWhen otherwise) {
-            if (condition) {
-                then.criteria(this);
-            } else {
-                otherwise.criteria(this);
-            }
-            return this;
-        }
-
-        public Criteria andLogicalDeleted(boolean deleted) {
-            return deleted ? andDeletedEqualTo(LitemallTopic.Deleted.IS_DELETED.value()) : andDeletedNotEqualTo(LitemallTopic.Deleted.IS_DELETED.value());
-        }
-
-        @Deprecated
-        public interface ICriteriaAdd {
-            Criteria add(Criteria add);
-        }
-    }
-
     public interface IExampleWhen {
         void example(com.lixin.litemall.db.domain.LitemallTopicExample example);
+    }
+
+    public static class Criterion {
+        private String condition;
+
+        private Object value;
+
+        private Object secondValue;
+
+        private boolean noValue;
+
+        private boolean singleValue;
+
+        private boolean betweenValue;
+
+        private boolean listValue;
+
+        private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
+        protected Criterion(String condition) {
+            super();
+            this.condition = condition;
+            this.typeHandler = null;
+            this.noValue = true;
+        }
+
+        protected Criterion(String condition, Object value, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.typeHandler = typeHandler;
+            if (value instanceof List<?>) {
+                this.listValue = true;
+            } else {
+                this.singleValue = true;
+            }
+        }
+
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.secondValue = secondValue;
+            this.typeHandler = typeHandler;
+            this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
+        }
     }
 
     protected abstract static class GeneratedCriteria {
@@ -1273,89 +1313,49 @@ public class LitemallTopicExample {
         }
     }
 
-    public static class Criterion {
-        private String condition;
+    public static class Criteria extends GeneratedCriteria {
+        private LitemallTopicExample example;
 
-        private Object value;
-
-        private Object secondValue;
-
-        private boolean noValue;
-
-        private boolean singleValue;
-
-        private boolean betweenValue;
-
-        private boolean listValue;
-
-        private String typeHandler;
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
-        }
-
-        protected Criterion(String condition) {
+        protected Criteria(LitemallTopicExample example) {
             super();
-            this.condition = condition;
-            this.typeHandler = null;
-            this.noValue = true;
+            this.example = example;
         }
 
-        protected Criterion(String condition, Object value, String typeHandler) {
-            super();
-            this.condition = condition;
-            this.value = value;
-            this.typeHandler = typeHandler;
-            if (value instanceof List<?>) {
-                this.listValue = true;
-            } else {
-                this.singleValue = true;
+        public LitemallTopicExample example() {
+            return this.example;
+        }
+
+        @Deprecated
+        public Criteria andIf(boolean ifAdd, ICriteriaAdd add) {
+            if (ifAdd) {
+                add.add(this);
             }
+            return this;
         }
 
-        protected Criterion(String condition, Object value) {
-            this(condition, value, null);
+        public Criteria when(boolean condition, ICriteriaWhen then) {
+            if (condition) {
+                then.criteria(this);
+            }
+            return this;
         }
 
-        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
-            super();
-            this.condition = condition;
-            this.value = value;
-            this.secondValue = secondValue;
-            this.typeHandler = typeHandler;
-            this.betweenValue = true;
+        public Criteria when(boolean condition, ICriteriaWhen then, ICriteriaWhen otherwise) {
+            if (condition) {
+                then.criteria(this);
+            } else {
+                otherwise.criteria(this);
+            }
+            return this;
         }
 
-        protected Criterion(String condition, Object value, Object secondValue) {
-            this(condition, value, secondValue, null);
+        public Criteria andLogicalDeleted(boolean deleted) {
+            return deleted ? andDeletedEqualTo(LitemallTopic.Deleted.IS_DELETED.value()) : andDeletedNotEqualTo(LitemallTopic.Deleted.IS_DELETED.value());
+        }
+
+        @Deprecated
+        public interface ICriteriaAdd {
+            Criteria add(Criteria add);
         }
     }
 }

@@ -45,6 +45,9 @@ public class LitemallCategory {
     @ApiModelProperty(value = "逻辑删除")
     private Boolean deleted;
 
+    @ApiModelProperty(value = "店铺ID")
+    private String shopId;
+
     public Integer getId() {
         return id;
     }
@@ -145,6 +148,14 @@ public class LitemallCategory {
         this.deleted = deleted;
     }
 
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -165,6 +176,7 @@ public class LitemallCategory {
         sb.append(", addTime=").append(addTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", deleted=").append(deleted);
+        sb.append(", shopId=").append(shopId);
         sb.append("]");
         return sb.toString();
     }
@@ -192,7 +204,8 @@ public class LitemallCategory {
                 && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
                 && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
                 && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()));
+                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()))
+                && (this.getShopId() == null ? other.getShopId() == null : this.getShopId().equals(other.getShopId()));
     }
 
     @Override
@@ -211,6 +224,7 @@ public class LitemallCategory {
         result = prime * result + ((getAddTime() == null) ? 0 : getAddTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getDeleted() == null) ? 0 : getDeleted().hashCode());
+        result = prime * result + ((getShopId() == null) ? 0 : getShopId().hashCode());
         return result;
     }
 
@@ -252,7 +266,8 @@ public class LitemallCategory {
         sortOrder("sort_order", "sortOrder", "TINYINT", false),
         addTime("add_time", "addTime", "TIMESTAMP", false),
         updateTime("update_time", "updateTime", "TIMESTAMP", false),
-        deleted("deleted", "deleted", "BIT", false);
+        deleted("deleted", "deleted", "BIT", false),
+        shopId("shop_id", "shopId", "VARCHAR", false);
 
         private static final String BEGINNING_DELIMITER = "`";
 

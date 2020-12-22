@@ -107,54 +107,94 @@ public class LitemallGoodsProductExample {
         void criteria(Criteria criteria);
     }
 
-    public static class Criteria extends GeneratedCriteria {
-        private LitemallGoodsProductExample example;
-
-        protected Criteria(LitemallGoodsProductExample example) {
-            super();
-            this.example = example;
-        }
-
-        public LitemallGoodsProductExample example() {
-            return this.example;
-        }
-
-        @Deprecated
-        public Criteria andIf(boolean ifAdd, ICriteriaAdd add) {
-            if (ifAdd) {
-                add.add(this);
-            }
-            return this;
-        }
-
-        public Criteria when(boolean condition, ICriteriaWhen then) {
-            if (condition) {
-                then.criteria(this);
-            }
-            return this;
-        }
-
-        public Criteria when(boolean condition, ICriteriaWhen then, ICriteriaWhen otherwise) {
-            if (condition) {
-                then.criteria(this);
-            } else {
-                otherwise.criteria(this);
-            }
-            return this;
-        }
-
-        public Criteria andLogicalDeleted(boolean deleted) {
-            return deleted ? andDeletedEqualTo(LitemallGoodsProduct.Deleted.IS_DELETED.value()) : andDeletedNotEqualTo(LitemallGoodsProduct.Deleted.IS_DELETED.value());
-        }
-
-        @Deprecated
-        public interface ICriteriaAdd {
-            Criteria add(Criteria add);
-        }
-    }
-
     public interface IExampleWhen {
         void example(com.lixin.litemall.db.domain.LitemallGoodsProductExample example);
+    }
+
+    public static class Criterion {
+        private String condition;
+
+        private Object value;
+
+        private Object secondValue;
+
+        private boolean noValue;
+
+        private boolean singleValue;
+
+        private boolean betweenValue;
+
+        private boolean listValue;
+
+        private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
+        protected Criterion(String condition) {
+            super();
+            this.condition = condition;
+            this.typeHandler = null;
+            this.noValue = true;
+        }
+
+        protected Criterion(String condition, Object value, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.typeHandler = typeHandler;
+            if (value instanceof List<?>) {
+                this.listValue = true;
+            } else {
+                this.singleValue = true;
+            }
+        }
+
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.secondValue = secondValue;
+            this.typeHandler = typeHandler;
+            this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
+        }
     }
 
     protected abstract static class GeneratedCriteria {
@@ -1061,91 +1101,151 @@ public class LitemallGoodsProductExample {
             addCriterion("deleted not between", value1, value2, "deleted");
             return (Criteria) this;
         }
+
+        public Criteria andSpecsJsonIsNull() {
+            addCriterion("specs_json is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonIsNotNull() {
+            addCriterion("specs_json is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonEqualTo(String value) {
+            addCriterion("specs_json =", value, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonEqualToColumn(LitemallGoodsProduct.Column column) {
+            addCriterion(new StringBuilder("specs_json = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonNotEqualTo(String value) {
+            addCriterion("specs_json <>", value, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonNotEqualToColumn(LitemallGoodsProduct.Column column) {
+            addCriterion(new StringBuilder("specs_json <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonGreaterThan(String value) {
+            addCriterion("specs_json >", value, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonGreaterThanColumn(LitemallGoodsProduct.Column column) {
+            addCriterion(new StringBuilder("specs_json > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonGreaterThanOrEqualTo(String value) {
+            addCriterion("specs_json >=", value, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonGreaterThanOrEqualToColumn(LitemallGoodsProduct.Column column) {
+            addCriterion(new StringBuilder("specs_json >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonLessThan(String value) {
+            addCriterion("specs_json <", value, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonLessThanColumn(LitemallGoodsProduct.Column column) {
+            addCriterion(new StringBuilder("specs_json < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonLessThanOrEqualTo(String value) {
+            addCriterion("specs_json <=", value, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonLessThanOrEqualToColumn(LitemallGoodsProduct.Column column) {
+            addCriterion(new StringBuilder("specs_json <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonLike(String value) {
+            addCriterion("specs_json like", value, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonNotLike(String value) {
+            addCriterion("specs_json not like", value, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonIn(List<String> values) {
+            addCriterion("specs_json in", values, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonNotIn(List<String> values) {
+            addCriterion("specs_json not in", values, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonBetween(String value1, String value2) {
+            addCriterion("specs_json between", value1, value2, "specsJson");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecsJsonNotBetween(String value1, String value2) {
+            addCriterion("specs_json not between", value1, value2, "specsJson");
+            return (Criteria) this;
+        }
     }
 
-    public static class Criterion {
-        private String condition;
+    public static class Criteria extends GeneratedCriteria {
+        private LitemallGoodsProductExample example;
 
-        private Object value;
-
-        private Object secondValue;
-
-        private boolean noValue;
-
-        private boolean singleValue;
-
-        private boolean betweenValue;
-
-        private boolean listValue;
-
-        private String typeHandler;
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
-        }
-
-        protected Criterion(String condition) {
+        protected Criteria(LitemallGoodsProductExample example) {
             super();
-            this.condition = condition;
-            this.typeHandler = null;
-            this.noValue = true;
+            this.example = example;
         }
 
-        protected Criterion(String condition, Object value, String typeHandler) {
-            super();
-            this.condition = condition;
-            this.value = value;
-            this.typeHandler = typeHandler;
-            if (value instanceof List<?>) {
-                this.listValue = true;
-            } else {
-                this.singleValue = true;
+        public LitemallGoodsProductExample example() {
+            return this.example;
+        }
+
+        @Deprecated
+        public Criteria andIf(boolean ifAdd, ICriteriaAdd add) {
+            if (ifAdd) {
+                add.add(this);
             }
+            return this;
         }
 
-        protected Criterion(String condition, Object value) {
-            this(condition, value, null);
+        public Criteria when(boolean condition, ICriteriaWhen then) {
+            if (condition) {
+                then.criteria(this);
+            }
+            return this;
         }
 
-        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
-            super();
-            this.condition = condition;
-            this.value = value;
-            this.secondValue = secondValue;
-            this.typeHandler = typeHandler;
-            this.betweenValue = true;
+        public Criteria when(boolean condition, ICriteriaWhen then, ICriteriaWhen otherwise) {
+            if (condition) {
+                then.criteria(this);
+            } else {
+                otherwise.criteria(this);
+            }
+            return this;
         }
 
-        protected Criterion(String condition, Object value, Object secondValue) {
-            this(condition, value, secondValue, null);
+        public Criteria andLogicalDeleted(boolean deleted) {
+            return deleted ? andDeletedEqualTo(LitemallGoodsProduct.Deleted.IS_DELETED.value()) : andDeletedNotEqualTo(LitemallGoodsProduct.Deleted.IS_DELETED.value());
+        }
+
+        @Deprecated
+        public interface ICriteriaAdd {
+            Criteria add(Criteria add);
         }
     }
 }
