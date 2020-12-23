@@ -53,6 +53,10 @@ public class WxGoodsServiceImpl implements WxGoodsService {
         for (LitemallGoods litemallGood : litemallGoods) {
             // 商品的VO
             GoodsProductVo goodsProductVo = new GoodsProductVo();
+
+            litemallGood.setName(litemallGood.getName().substring(0, 3));
+            litemallGood.setBrief(litemallGood.getName().substring(0, 3));
+
             beanCopier.copy(litemallGood, goodsProductVo, null);
 
             // 对应用的规格进行填充
@@ -69,6 +73,7 @@ public class WxGoodsServiceImpl implements WxGoodsService {
                     goodsSpecificationVo.setSpecs(JacksonUtil.mapper.readValue(goodsSpec.getSpecsJson(),
                             new TypeReference<HashMap<String, String>>() {
                             }));
+
                 } catch (IOException e) {
                     logger.error("parse spec json error , specs id {}", goodsSpec.getId());
                     continue;
@@ -123,6 +128,9 @@ public class WxGoodsServiceImpl implements WxGoodsService {
 
             // 获取当前分类下的商品
             List<GoodsProductVo> allOrderGoodsAndCateGory = getAllOrderGoodsAndCateGory(category.getId());
+            if (allOrderGoodsAndCateGory.size() <= 3) {
+                continue;
+            }
             categoryInfoVo.setItems(allOrderGoodsAndCateGory);
             categoryInfoVos.add(categoryInfoVo);
         }

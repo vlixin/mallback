@@ -35,7 +35,12 @@ public class GoodsProductVo {
 
     // 零售价格
     private BigDecimal retailPrice;
+
+    // 商品数量
+    private int count;
+
     // 上面是 goods自己的属性
+
 
     // 下面是 商品的规格信息
     List<GoodsSpecificationVo> specifications;
