@@ -111,6 +111,7 @@ public class WxGoodsServiceImpl implements WxGoodsService {
         StoreInfoVo store = new StoreInfoVo();
         store.setDelPrice(admin.getDelPrice());
         store.setMinDelPrice(admin.getMinDelPrice());
+        store.setStoreName(admin.getShopName());
 
         ArrayList<CategoryInfoVo> categoryInfoVos = new ArrayList<>();
         List<LitemallCategory> allOrderGoodsCategory = getAllOrderGoodsCategory(shopId);

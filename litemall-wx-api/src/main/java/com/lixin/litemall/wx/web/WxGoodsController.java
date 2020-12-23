@@ -9,6 +9,8 @@ import com.lixin.litemall.core.validator.Sort;
 import com.lixin.litemall.db.domain.*;
 import com.lixin.litemall.db.service.*;
 import com.lixin.litemall.wx.annotation.LoginUser;
+import com.lixin.litemall.wx.service.impl.WxGoodsServiceImpl;
+import com.lixin.litemall.wx.vo.StoreInfoVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +66,9 @@ public class WxGoodsController {
 	private LitemallGoodsSpecificationService goodsSpecificationService;
 	@Autowired
 	private LitemallGrouponRulesService rulesService;
+
+	@Autowired
+	WxGoodsServiceImpl wxGoodsService;
 
 	/**
 	 * 商品详情
@@ -314,8 +319,9 @@ public class WxGoodsController {
 	/**
 	 * 获取带排序的所有商品
 	 */
-	public CommonResult<List<LitemallGoods>> getOrderGoods() {
-		return null;
+	@GetMapping("StoreAllInfo")
+	public CommonResult<StoreInfoVo> storeAllInfo(@RequestParam("shopId") String shopId) {
+		return CommonResult.success(wxGoodsService.getAllCategoryAndGoods(shopId));
 	}
 
 }

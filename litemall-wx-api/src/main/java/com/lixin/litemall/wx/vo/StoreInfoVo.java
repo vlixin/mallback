@@ -12,5 +12,6 @@ import java.util.List;
 public class StoreInfoVo {
     Integer minDelPrice;
     Integer delPrice;
+    String storeName;
     List<CategoryInfoVo> food;
 }
