@@ -31,6 +31,9 @@ public class LitemallGoodsAttribute {
     @ApiModelProperty(value = "逻辑删除")
     private Boolean deleted;
 
+    @ApiModelProperty(value = "0 不可选属性 1 可选属性")
+    private Byte canSelect;
+
     public Integer getId() {
         return id;
     }
@@ -91,6 +94,14 @@ public class LitemallGoodsAttribute {
         this.deleted = deleted;
     }
 
+    public Byte getCanSelect() {
+        return canSelect;
+    }
+
+    public void setCanSelect(Byte canSelect) {
+        this.canSelect = canSelect;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -106,6 +117,7 @@ public class LitemallGoodsAttribute {
         sb.append(", addTime=").append(addTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", deleted=").append(deleted);
+        sb.append(", canSelect=").append(canSelect);
         sb.append("]");
         return sb.toString();
     }
@@ -128,7 +140,8 @@ public class LitemallGoodsAttribute {
                 && (this.getValue() == null ? other.getValue() == null : this.getValue().equals(other.getValue()))
                 && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
                 && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()));
+                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()))
+                && (this.getCanSelect() == null ? other.getCanSelect() == null : this.getCanSelect().equals(other.getCanSelect()));
     }
 
     @Override
@@ -142,6 +155,7 @@ public class LitemallGoodsAttribute {
         result = prime * result + ((getAddTime() == null) ? 0 : getAddTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getDeleted() == null) ? 0 : getDeleted().hashCode());
+        result = prime * result + ((getCanSelect() == null) ? 0 : getCanSelect().hashCode());
         return result;
     }
 
@@ -178,7 +192,8 @@ public class LitemallGoodsAttribute {
         value("value", "value", "VARCHAR", true),
         addTime("add_time", "addTime", "TIMESTAMP", false),
         updateTime("update_time", "updateTime", "TIMESTAMP", false),
-        deleted("deleted", "deleted", "BIT", false);
+        deleted("deleted", "deleted", "BIT", false),
+        canSelect("can_select", "canSelect", "TINYINT", false);
 
         private static final String BEGINNING_DELIMITER = "`";
 

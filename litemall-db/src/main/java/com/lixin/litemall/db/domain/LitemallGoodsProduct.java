@@ -17,7 +17,7 @@ public class LitemallGoodsProduct {
     @ApiModelProperty(value = "商品表的商品ID")
     private Integer goodsId;
 
-    @ApiModelProperty(value = "商品规格值列表")
+    @ApiModelProperty(value = "商品规格值列表，采用JSON数组格式")
     private String[] specifications;
 
     @ApiModelProperty(value = "商品货品价格")

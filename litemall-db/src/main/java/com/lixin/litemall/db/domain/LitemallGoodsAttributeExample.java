@@ -792,6 +792,96 @@ public class LitemallGoodsAttributeExample {
             addCriterion("deleted not between", value1, value2, "deleted");
             return (Criteria) this;
         }
+
+        public Criteria andCanSelectIsNull() {
+            addCriterion("can_select is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectIsNotNull() {
+            addCriterion("can_select is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectEqualTo(Byte value) {
+            addCriterion("can_select =", value, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectEqualToColumn(LitemallGoodsAttribute.Column column) {
+            addCriterion(new StringBuilder("can_select = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectNotEqualTo(Byte value) {
+            addCriterion("can_select <>", value, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectNotEqualToColumn(LitemallGoodsAttribute.Column column) {
+            addCriterion(new StringBuilder("can_select <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectGreaterThan(Byte value) {
+            addCriterion("can_select >", value, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectGreaterThanColumn(LitemallGoodsAttribute.Column column) {
+            addCriterion(new StringBuilder("can_select > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectGreaterThanOrEqualTo(Byte value) {
+            addCriterion("can_select >=", value, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectGreaterThanOrEqualToColumn(LitemallGoodsAttribute.Column column) {
+            addCriterion(new StringBuilder("can_select >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectLessThan(Byte value) {
+            addCriterion("can_select <", value, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectLessThanColumn(LitemallGoodsAttribute.Column column) {
+            addCriterion(new StringBuilder("can_select < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectLessThanOrEqualTo(Byte value) {
+            addCriterion("can_select <=", value, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectLessThanOrEqualToColumn(LitemallGoodsAttribute.Column column) {
+            addCriterion(new StringBuilder("can_select <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectIn(List<Byte> values) {
+            addCriterion("can_select in", values, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectNotIn(List<Byte> values) {
+            addCriterion("can_select not in", values, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectBetween(Byte value1, Byte value2) {
+            addCriterion("can_select between", value1, value2, "canSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanSelectNotBetween(Byte value1, Byte value2) {
+            addCriterion("can_select not between", value1, value2, "canSelect");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

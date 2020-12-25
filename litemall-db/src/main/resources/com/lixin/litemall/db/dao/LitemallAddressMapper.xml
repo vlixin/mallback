@@ -65,7 +65,7 @@
                 <when test="criterion.listValue">
                   and ${criterion.condition}
                   <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
+                      #{listItem}
                   </foreach>
                 </when>
               </choose>
@@ -150,18 +150,18 @@
                 <include refid="Base_Column_List"/>
             </otherwise>
         </choose>
-    from litemall_address
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-      delete
-      from litemall_address
-      where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.lixin.litemall.db.domain.LitemallAddressExample">
-    delete from litemall_address
-    <if test="_parameter != null">
-        <include refid="Example_Where_Clause"/>
+        from litemall_address
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from litemall_address
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.lixin.litemall.db.domain.LitemallAddressExample">
+        delete from litemall_address
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
     </if>
   </delete>
   <insert id="insert" parameterType="com.lixin.litemall.db.domain.LitemallAddress">
@@ -250,15 +250,15 @@
       <if test="postalCode != null">
         #{postalCode,jdbcType=CHAR},
       </if>
-      <if test="tel != null">
-        #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="isDefault != null">
-        #{isDefault,jdbcType=BIT},
-      </if>
-      <if test="addTime != null">
-          #{addTime,jdbcType=TIMESTAMP},
-      </if>
+        <if test="tel != null">
+            #{tel,jdbcType=VARCHAR},
+        </if>
+        <if test="isDefault != null">
+            #{isDefault,jdbcType=BIT},
+        </if>
+        <if test="addTime != null">
+            #{addTime,jdbcType=TIMESTAMP},
+        </if>
         <if test="updateTime != null">
             #{updateTime,jdbcType=TIMESTAMP},
         </if>
@@ -284,16 +284,16 @@
                 `name` = #{record.name,jdbcType=VARCHAR},
             </if>
             <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.province != null">
-        province = #{record.province,jdbcType=VARCHAR},
-      </if>
-      <if test="record.city != null">
-        city = #{record.city,jdbcType=VARCHAR},
-      </if>
-      <if test="record.county != null">
-        county = #{record.county,jdbcType=VARCHAR},
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.province != null">
+                province = #{record.province,jdbcType=VARCHAR},
+            </if>
+            <if test="record.city != null">
+                city = #{record.city,jdbcType=VARCHAR},
+            </if>
+            <if test="record.county != null">
+                county = #{record.county,jdbcType=VARCHAR},
       </if>
       <if test="record.addressDetail != null">
         address_detail = #{record.addressDetail,jdbcType=VARCHAR},
@@ -431,16 +431,16 @@
                 <include refid="Base_Column_List"/>
             </otherwise>
         </choose>
-    from litemall_address
-    <if test="example != null">
-        <include refid="Update_By_Example_Where_Clause"/>
-    </if>
-    <if test="example != null and example.orderByClause != null">
-      order by ${example.orderByClause}
-    </if>
-    limit 1
-  </select>
-  <update id="logicalDeleteByExample" parameterType="map">
+        from litemall_address
+        <if test="example != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+        limit 1
+    </select>
+    <update id="logicalDeleteByExample" parameterType="map">
     update litemall_address set deleted = 1
     <if test="_parameter != null">
         <include refid="Update_By_Example_Where_Clause"/>

@@ -10,6 +10,7 @@ import com.lixin.litemall.wx.vo.goods.GoodsProductVo;
 import com.lixin.litemall.wx.vo.goods.SkuAttr;
 import com.lixin.litemall.wx.vo.goods.SpuAttr;
 import net.sf.cglib.beans.BeanCopier;
+import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -77,16 +78,18 @@ public class WxGoodsServiceImpl implements WxGoodsService {
             List<LitemallGoodsProduct> goodsSpecs = productMapper.selectByExample(productExample);
             for (LitemallGoodsProduct goodsSpec : goodsSpecs) {
                 SkuAttr skuAttr = new SkuAttr();
-                skuAttr.setSpec(Arrays.asList(goodsSpec.getSpecifications()));
+                skuAttr.setSpec(Strings.join(Arrays.asList(goodsSpec.getSpecifications()), '-'));
                 skuAttr.setPrice(goodsSpec.getPrice());
                 skuses.add(skuAttr);
             }
             goodsProductVo.setSkuAttrList(skuses);
 
+
             // 获取商品的可选的spu 属性
             LitemallGoodsAttributeExample attributeExample = new LitemallGoodsAttributeExample();
             attributeExample.createCriteria()
-                    .andGoodsIdEqualTo(litemallGood.getId());
+                    .andGoodsIdEqualTo(litemallGood.getId())
+                    .andCanSelectEqualTo(CommonSymbol.CanSelect);
 
             List<LitemallGoodsAttribute> attributes = attributeMapper.selectByExample(attributeExample);
             ArrayList<SpuAttr> spuAttrs = new ArrayList<>();
@@ -96,6 +99,7 @@ public class WxGoodsServiceImpl implements WxGoodsService {
                 spuAttr.setAttrValues(Arrays.asList(attribute.getValue().split(CommonSymbol.attrSplit)));
                 spuAttrs.add(spuAttr);
             }
+
             goodsProductVo.setSpuAttrList(spuAttrs);
 
             goodsVos.add(goodsProductVo);
