@@ -322,7 +322,6 @@ public class WxGoodsController {
 	 */
 	@GetMapping("StoreAllInfo")
 	public CommonResult<StoreInfoVo> storeAllInfo(@RequestParam("shopId") String shopId) {
-		System.out.println(shopId);
 		return CommonResult.success(wxGoodsService.getAllCategoryAndGoods(shopId));
 	}
 

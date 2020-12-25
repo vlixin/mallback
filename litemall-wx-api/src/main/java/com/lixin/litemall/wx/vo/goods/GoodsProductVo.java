@@ -42,7 +42,11 @@ public class GoodsProductVo {
     // 上面是 goods自己的属性
 
 
-    // 下面是 商品的规格信息
-    List<GoodsSpecificationVo> specifications;
+    // 下面是 商品的规格信息 stock keep 商品库存属性 Stock Keeping Unit
+    List<SkuAttr> skuAttrList;
+
+    // 商品的可选属性  商品标准单元  Standard Product Unit
+    List<SpuAttr> spuAttrList;
+
 
 }

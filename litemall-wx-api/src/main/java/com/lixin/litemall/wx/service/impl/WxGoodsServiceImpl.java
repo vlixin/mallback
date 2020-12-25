@@ -1,26 +1,22 @@
 package com.lixin.litemall.wx.service.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.lixin.litemall.core.util.JacksonUtil;
-import com.lixin.litemall.db.dao.LitemallAdminMapper;
-import com.lixin.litemall.db.dao.LitemallCategoryMapper;
-import com.lixin.litemall.db.dao.LitemallGoodsMapper;
-import com.lixin.litemall.db.dao.LitemallGoodsProductMapper;
+import com.lixin.litemall.common.common.CommonSymbol;
+import com.lixin.litemall.db.dao.*;
 import com.lixin.litemall.db.domain.*;
 import com.lixin.litemall.wx.service.WxGoodsService;
 import com.lixin.litemall.wx.vo.StoreInfoVo;
 import com.lixin.litemall.wx.vo.goods.CategoryInfoVo;
 import com.lixin.litemall.wx.vo.goods.GoodsProductVo;
-import com.lixin.litemall.wx.vo.goods.GoodsSpecificationVo;
+import com.lixin.litemall.wx.vo.goods.SkuAttr;
+import com.lixin.litemall.wx.vo.goods.SpuAttr;
 import net.sf.cglib.beans.BeanCopier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -37,19 +33,29 @@ public class WxGoodsServiceImpl implements WxGoodsService {
     LitemallCategoryMapper categoryMapper;
     @Resource
     LitemallAdminMapper adminMapper;
+    @Resource
+    LitemallGoodsAttributeMapper attributeMapper;
 
     Logger logger = LoggerFactory.getLogger(WxGoodsServiceImpl.class);
 
+    /**
+     * 获取某个分类下所有的商品
+     *
+     * @param cateGoryId
+     * @return
+     */
     @Override
     public List<GoodsProductVo> getAllOrderGoodsAndCateGory(Integer cateGoryId) {
 
         LitemallGoodsExample litemallGoodsExample = new LitemallGoodsExample();
+
         litemallGoodsExample.createCriteria()
                 .andCategoryIdEqualTo(cateGoryId);
         ArrayList<GoodsProductVo> goodsVos = new ArrayList<>();
 
         List<LitemallGoods> litemallGoods = goodsMapper.selectByExample(litemallGoodsExample);
 
+        // 对商品属性进行填充
         for (LitemallGoods litemallGood : litemallGoods) {
             // 商品的VO
             GoodsProductVo goodsProductVo = new GoodsProductVo();
@@ -61,33 +67,43 @@ public class WxGoodsServiceImpl implements WxGoodsService {
 
             // 对应用的规格进行填充
             LitemallGoodsProductExample productExample = new LitemallGoodsProductExample();
+            ArrayList<SkuAttr> skuses = new ArrayList<>();
+
             productExample.createCriteria()
                     .andGoodsIdEqualTo(litemallGood.getId());
 
-            ArrayList<GoodsSpecificationVo> goodsSpecificationVos = new ArrayList<>();
+
+            // 获取某个商品的规格(sku)属性
             List<LitemallGoodsProduct> goodsSpecs = productMapper.selectByExample(productExample);
-
             for (LitemallGoodsProduct goodsSpec : goodsSpecs) {
-                GoodsSpecificationVo goodsSpecificationVo = new GoodsSpecificationVo();
-                try {
-                    goodsSpecificationVo.setSpecs(JacksonUtil.mapper.readValue(goodsSpec.getSpecsJson(),
-                            new TypeReference<HashMap<String, String>>() {
-                            }));
-
-                } catch (IOException e) {
-                    logger.error("parse spec json error , specs id {}", goodsSpec.getId());
-                    continue;
-                }
-                goodsSpecificationVo.setPrice(goodsSpec.getPrice());
-
-                goodsSpecificationVos.add(goodsSpecificationVo);
+                SkuAttr skuAttr = new SkuAttr();
+                skuAttr.setSpec(Arrays.asList(goodsSpec.getSpecifications()));
+                skuAttr.setPrice(goodsSpec.getPrice());
+                skuses.add(skuAttr);
             }
-            goodsProductVo.setSpecifications(goodsSpecificationVos);
+            goodsProductVo.setSkuAttrList(skuses);
+
+            // 获取商品的可选的spu 属性
+            LitemallGoodsAttributeExample attributeExample = new LitemallGoodsAttributeExample();
+            attributeExample.createCriteria()
+                    .andGoodsIdEqualTo(litemallGood.getId());
+
+            List<LitemallGoodsAttribute> attributes = attributeMapper.selectByExample(attributeExample);
+            ArrayList<SpuAttr> spuAttrs = new ArrayList<>();
+            for (LitemallGoodsAttribute attribute : attributes) {
+                SpuAttr spuAttr = new SpuAttr();
+                spuAttr.setSpuAttrName(attribute.getAttribute());
+                spuAttr.setAttrValues(Arrays.asList(attribute.getValue().split(CommonSymbol.attrSplit)));
+                spuAttrs.add(spuAttr);
+            }
+            goodsProductVo.setSpuAttrList(spuAttrs);
+
             goodsVos.add(goodsProductVo);
         }
 
         return goodsVos;
     }
+
 
     @Override
     public List<LitemallCategory> getAllOrderGoodsCategory(String shopId) {
@@ -120,7 +136,9 @@ public class WxGoodsServiceImpl implements WxGoodsService {
 
         ArrayList<CategoryInfoVo> categoryInfoVos = new ArrayList<>();
         List<LitemallCategory> allOrderGoodsCategory = getAllOrderGoodsCategory(shopId);
+
         for (LitemallCategory category : allOrderGoodsCategory) {
+
             CategoryInfoVo categoryInfoVo = new CategoryInfoVo();
             categoryInfoVo.setCategoryId(category.getId());
             categoryInfoVo.setCategoryName(category.getName());

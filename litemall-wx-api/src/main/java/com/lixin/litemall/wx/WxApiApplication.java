@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.lixin.litemall.db.dao")
 @EnableTransactionManagement
 @EnableScheduling
-public class Application {
+public class WxApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(WxApiApplication.class, args);
     }
 
 }
