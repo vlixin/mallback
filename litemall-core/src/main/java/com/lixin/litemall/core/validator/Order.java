@@ -13,6 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = OrderValidator.class)
+
 public @interface Order {
     String message() default "排序类型不支持";
 

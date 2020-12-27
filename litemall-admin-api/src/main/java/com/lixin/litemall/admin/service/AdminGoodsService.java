@@ -2,6 +2,7 @@ package com.lixin.litemall.admin.service;
 
 import com.lixin.litemall.admin.dto.GoodsAllinone;
 import com.lixin.litemall.admin.vo.CatVo;
+import com.lixin.litemall.admin.vo.good.GoodsDetialVo;
 import com.lixin.litemall.core.qcode.QCodeService;
 import com.lixin.litemall.core.util.ResponseUtil;
 import com.lixin.litemall.db.domain.*;
@@ -42,10 +43,9 @@ public class AdminGoodsService {
     @Autowired
     private QCodeService qCodeService;
 
-    public Object list(Integer goodsId, String goodsSn, String name,
-                       Integer page, Integer limit, String sort, String order) {
-        List<LitemallGoods> goodsList = goodsService.querySelective(goodsId, goodsSn, name, page, limit, sort, order);
-        return ResponseUtil.okList(goodsList);
+    public List<LitemallGoods> list(Integer goodsId, String goodsSn, String name,
+                                    Integer page, Integer limit, String sort, String order) {
+        return goodsService.querySelective(goodsId, goodsSn, name, page, limit, sort, order);
     }
 
     private Object validate(GoodsAllinone goodsAllinone) {
@@ -326,7 +326,7 @@ public class AdminGoodsService {
         return ResponseUtil.ok(data);
     }
 
-    public Object detail(Integer id) {
+    public GoodsDetialVo detail(Integer id) {
         LitemallGoods goods = goodsService.findById(id);
         List<LitemallGoodsProduct> products = productService.queryByGid(id);
         List<LitemallGoodsSpecification> specifications = specificationService.queryByGid(id);
@@ -340,14 +340,12 @@ public class AdminGoodsService {
             categoryIds = new Integer[]{parentCategoryId, categoryId};
         }
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("goods", goods);
-        data.put("specifications", specifications);
-        data.put("products", products);
-        data.put("attributes", attributes);
-        data.put("categoryIds", categoryIds);
-
-        return ResponseUtil.ok(data);
+        return GoodsDetialVo.builder()
+                .attributes(attributes)
+                .goods(goods)
+                .products(products)
+                .specifications(specifications)
+                .build();
     }
 
 }

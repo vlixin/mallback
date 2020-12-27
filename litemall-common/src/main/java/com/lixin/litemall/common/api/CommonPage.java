@@ -10,10 +10,10 @@ import java.util.List;
  * Created by macro on 2019/4/19.
  */
 public class CommonPage<T> {
-    private Integer pageNum;
-    private Integer pageSize;
-    private Integer totalPage;
-    private Long total;
+    private Integer page;//pageNum
+    private Integer limit; //pageSize
+    private Integer pages;//pages
+    private Long total;//getTotal
     private List<T> list;
 
 
@@ -23,45 +23,37 @@ public class CommonPage<T> {
     public static <T> CommonPage<T> restPage(List<T> list) {
         CommonPage<T> result = new CommonPage<T>();
         PageInfo<T> pageInfo = new PageInfo<T>(list);
-        result.setTotalPage(pageInfo.getPages());
-        result.setPageNum(pageInfo.getPageNum());
-        result.setPageSize(pageInfo.getPageSize());
+        result.setPages(pageInfo.getPages());
+        result.setPage(pageInfo.getPageNum());
+        result.setLimit(pageInfo.getPageSize());
         result.setTotal(pageInfo.getTotal());
         result.setList(pageInfo.getList());
         return result;
     }
 
 
-    public Integer getPageNum() {
-        return pageNum;
+    public Integer getPage() {
+        return page;
     }
 
-    public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
-    public Integer getPageSize() {
-        return pageSize;
+    public Integer getLimit() {
+        return limit;
     }
 
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
-    public Integer getTotalPage() {
-        return totalPage;
+    public Integer getPages() {
+        return pages;
     }
 
-    public void setTotalPage(Integer totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
+    public void setPages(Integer pages) {
+        this.pages = pages;
     }
 
     public Long getTotal() {
@@ -70,5 +62,13 @@ public class CommonPage<T> {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
     }
 }

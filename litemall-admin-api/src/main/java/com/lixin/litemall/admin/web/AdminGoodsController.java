@@ -2,6 +2,9 @@ package com.lixin.litemall.admin.web;
 
 import com.lixin.litemall.admin.dto.GoodsAllinone;
 import com.lixin.litemall.admin.service.AdminGoodsService;
+import com.lixin.litemall.admin.vo.good.GoodsDetialVo;
+import com.lixin.litemall.common.api.CommonPage;
+import com.lixin.litemall.common.api.CommonResult;
 import com.lixin.litemall.core.validator.Order;
 import com.lixin.litemall.core.validator.Sort;
 import com.lixin.litemall.db.domain.LitemallGoods;
@@ -25,24 +28,26 @@ public class AdminGoodsController {
     /**
      * 查询商品
      *
-     * @param goodsId
-     * @param goodsSn
-     * @param name
-     * @param page
-     * @param limit
-     * @param sort
+     * @param goodsId 商品ID
+     * @param goodsSn 商品SN
+     * @param name    商品名称
+     * @param page    当前页面
+     * @param limit   页面大小
+     * @param sort    排序 根据时间
      * @param order
      * @return
      */
     //("admin:goods:list")
     //Desc(menu = {"商品管理", "商品管理"}, button = "查询")
     @GetMapping("/list")
-    public Object list(Integer goodsId, String goodsSn, String name,
-                       @RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer limit,
-                       @Sort @RequestParam(defaultValue = "add_time") String sort,
-                       @Order @RequestParam(defaultValue = "desc") String order) {
-        return adminGoodsService.list(goodsId, goodsSn, name, page, limit, sort, order);
+    public CommonResult<CommonPage<LitemallGoods>> list(Integer goodsId, String goodsSn, String name,
+                                                        @RequestParam(defaultValue = "1") Integer page,
+                                                        @RequestParam(defaultValue = "10") Integer limit,
+                                                        @Sort @RequestParam(defaultValue = "add_time") String sort,
+                                                        @Order @RequestParam(defaultValue = "desc") String order) {
+        return CommonResult.success(CommonPage.restPage(
+                adminGoodsService.list(goodsId, goodsSn, name, page, limit, sort, order)
+        ));
     }
 
     @GetMapping("/catAndBrand")
@@ -98,9 +103,8 @@ public class AdminGoodsController {
     //("admin:goods:read")
     //Desc(menu = {"商品管理", "商品管理"}, button = "详情")
     @GetMapping("/detail")
-    public Object detail(@NotNull Integer id) {
-        return adminGoodsService.detail(id);
-
+    public CommonResult<GoodsDetialVo> detail(@NotNull Integer id) {
+        return CommonResult.success(adminGoodsService.detail(id));
     }
 
 }

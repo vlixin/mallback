@@ -30,7 +30,7 @@ public class AdminAuthController {
     @Autowired
     JwtTokenUtil jwtTokenUtil;
     @Autowired
-    private LitemallAdminService adminService;
+    LitemallAdminService adminService;
 
     @Autowired
     private LitemallRoleService roleService;
